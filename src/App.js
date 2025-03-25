@@ -1,18 +1,43 @@
 import "./App.css";
-import Review from "./Review";
 
-// In this project, we are organizing our code by separating components into individual files.
-// This approach allows for better modularity and reusability of components throughout the application.
+// Components can include events and functions—they are not limited to just rendering UI.
+function Greeting(props) {
+  // A simple click handler that shows an alert with a greeting message.
+  function helloClick() {
+    alert(`Hello ${props.name}`);
+  }
 
-// We are building a movie review web application that includes ratings, reviews, and comments.
-// The components will be split across three files: Review.js, Ratings.js, and App.js.
+  return <button onClick={helloClick}>Say Hello</button>;
+}
+
+function GreetingEventParam(props) {
+  // Sometimes, we need specific information about the event,
+  // such as the ID of the clicked button, to make decisions or process data accordingly.
+
+  function greetClick(event) {
+    // Using the ternary operator to choose a greeting based on the button's ID.
+    // Ternary syntax: condition ? value_if_true : value_if_false
+    const greeting = event.target.id === "helloBtn" ? "Hello" : "Hey";
+    alert(`${greeting} ${props.name}`);
+  }
+
+  return (
+    <div>
+      <button id="helloBtn" onClick={greetClick}>
+        Say Hello
+      </button>
+      <button id="heyBtn" onClick={greetClick}>
+        Say Hello
+      </button>
+    </div>
+  );
+}
 
 function App() {
   return (
     <div>
-      <Review username="Ozgur" rating={3} text="This movie was great!" />
-      <hr />
-      <Review username="Utku" rating={1} text="This movie was awful!" />
+      <Greeting name="Ozgur" />
+      <GreetingEventParam name="Utku" />
     </div>
   );
 }
